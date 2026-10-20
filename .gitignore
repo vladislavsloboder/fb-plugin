@@ -1,0 +1,9 @@
+node_modules/
+dist/
+GNUmakefile
+mage_output_file.go
+.DS_Store
+*.exe
+*.dll
+*.so
+

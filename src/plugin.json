@@ -1,0 +1,16 @@
+{
+  "type": "datasource",
+  "name": "Firebird 2.5",
+  "id": "your-org-firebird-datasource",
+  "backend": true,
+  "executable": "gpx_firebird_datasource",
+  "info": {
+    "description": "Firebird 2.5 Data Source Plugin for Grafana",
+    "author": { "name": "Vladislav Sloboder" }
+  },
+  "dependencies": {
+    "grafanaDependency": ">=9.0.0",
+    "plugins": []
+  }
+}
+
