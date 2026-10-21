@@ -1,0 +1,29 @@
+{
+  "name": "archidb-fb25-datasource",
+  "version": "1.0.0",
+  "description": "Firebird 2.5 Data Source Plugin for Grafana",
+  "author": "Vladislav Sloboder",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "webpack -c .config/webpack/webpack.config.js",
+    "dev": "webpack -c .config/webpack/webpack.config.js -w",
+    "test": "jest"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "devDependencies": {
+    "@grafana/data": "^10.4.0",
+    "@grafana/runtime": "^10.4.0",
+    "@grafana/toolkit": "^10.4.0",
+    "@grafana/ui": "^10.4.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0"
+  }
+}
+
