@@ -27,41 +27,41 @@ jobs:
 
       - name: Install dependencies & Build Frontend
         run: |
-          npm install
+          npm ci || npm install
           npm run build
 
       - name: Build Go Backend (Linux AMD64 & ARM64)
         run: |
           mkdir -p dist
+          # Build für Intel/AMD 64-Bit
           GOOS=linux GOARCH=amd64 go build -o dist/gpx_archidb-fb25-datasource ./pkg
           cp dist/gpx_archidb-fb25-datasource dist/gpx_archidb-fb25-datasource_linux_amd64
+          
+          # Build für ARM 64-Bit (Apple Silicon / ARM Cloud)
           GOOS=linux GOARCH=arm64 go build -o dist/gpx_archidb-fb25-datasource_linux_arm64 ./pkg
+          
+          # Ausführungsrechte vergeben
           chmod +x dist/gpx_archidb-fb25-datasource*
 
       - name: Package Plugin into ZIP dynamically
         run: |
-          # Liest die Version automatisch aus der plugin.json aus (z.B. "1.0.0")
+          # Liest Plugin-ID und Version aus der src/plugin.json
           VERSION=$(jq -r '.info.version' src/plugin.json)
           PLUGIN_ID=$(jq -r '.id' src/plugin.json)
           
           echo "Building package for plugin: $PLUGIN_ID, version: $VERSION"
           
-          # Ordner für das Archiv erstellen
+          # Ordnerstruktur für das Grafana-Archiv aufbauen
           mkdir -p "$PLUGIN_ID"
           cp -r dist/* "$PLUGIN_ID/"
           
-          # ZIP-Datei mit dynamischem Namen erzeugen
+          # Archiv erstellen
           ZIP_NAME="${PLUGIN_ID}-${VERSION}.zip"
           zip -r "$ZIP_NAME" "$PLUGIN_ID"
-          
-          # Für den Artifact-Upload speichern wir den Namen in einer Env-Variable
-          echo "ZIP_FILE=$ZIP_NAME" >> $GITHUB_ENV
 
       - name: Upload Plugin ZIP Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: grafana-plugin-artifact
+          name: archidb-fb25-datasource-plugin
           path: "*.zip"
-
-
 
