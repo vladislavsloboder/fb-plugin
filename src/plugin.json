@@ -1,16 +1,22 @@
 {
   "type": "datasource",
-  "name": "Firebird 2.5",
-  "id": "your-org-firebird-datasource",
+  "name": "FB25",
+  "id": "archidb-fb25-datasource",
   "backend": true,
-  "executable": "gpx_firebird_datasource",
+  "executable": "gpx_archidb-fb25-datasource",
   "info": {
-    "description": "Firebird 2.5 Data Source Plugin for Grafana",
-    "author": { "name": "Vladislav Sloboder" }
-  },
+    "description": "Grafana Data Source Plugin für Firebird 2.5",
+    "author": {
+      "name": "Vladislav Sloboder"
+    },
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "version": "1.0.0"
+  }
   "dependencies": {
     "grafanaDependency": ">=9.0.0",
     "plugins": []
   }
 }
-
