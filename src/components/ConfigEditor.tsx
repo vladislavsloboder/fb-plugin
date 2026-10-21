@@ -1,16 +1,15 @@
 import React from 'react';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
 import { InlineField, Input, SecretInput } from '@grafana/ui';
-import { FirebirdDataSourceOptions, FirebirdSecureJsonData } from '../types';
+import { MyDataSourceOptions, MySecureJsonData } from '../types';
 
-type Props = DataSourcePluginOptionsEditorProps<FirebirdDataSourceOptions, FirebirdSecureJsonData>;
+type Props = DataSourcePluginOptionsEditorProps<MyDataSourceOptions, MySecureJsonData>;
 
 export function ConfigEditor(props: Props) {
   const { options, onOptionsChange } = props;
   const { jsonData, secureJsonFields, secureJsonData } = options;
 
-  // Handler für Änderungen an ungesicherten Feldern
-  constonFieldChange = (key: keyof FirebirdDataSourceOptions) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onFieldChange = (key: keyof MyDataSourceOptions) => (event: React.ChangeEvent<HTMLInputElement>) => {
     onOptionsChange({
       ...options,
       jsonData: {
@@ -20,7 +19,6 @@ export function ConfigEditor(props: Props) {
     });
   };
 
-  // Handler für Änderungen am Passwort
   const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onOptionsChange({
       ...options,
@@ -48,7 +46,7 @@ export function ConfigEditor(props: Props) {
   return (
     <div className="gf-form-group">
       <h3>Firebird 2.5 Verbindungseinstellungen</h3>
-      
+
       <InlineField label="Host" labelWidth={14}>
         <Input
           placeholder="localhost"
@@ -68,7 +66,7 @@ export function ConfigEditor(props: Props) {
         />
       </InlineField>
 
-      <InlineField label="Datenbankpfad" labelWidth={14}>
+      <InlineField label="Datenbankpfad / Alias" labelWidth={14}>
         <Input
           placeholder="/var/lib/firebird/2.5/data/mydb.fdb"
           value={jsonData.database || ''}
@@ -77,7 +75,7 @@ export function ConfigEditor(props: Props) {
         />
       </InlineField>
 
-      <InlineField label="User" labelWidth={14}>
+      <InlineField label="Benutzer" labelWidth={14}>
         <Input
           placeholder="SYSDBA"
           value={jsonData.user || ''}
@@ -99,4 +97,3 @@ export function ConfigEditor(props: Props) {
     </div>
   );
 }
-
